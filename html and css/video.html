@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/videorecording" method="POST">
+        {%csrf_token%}
+        <input type="text" value="0" name="q" hidden>
+        <button type="submit">Start Recording </button>
+    </form>
+    <form action="video" method="POST">
+        {%csrf_token%}
+        <input type="text" value="1" name="q" hidden>
+        <button type="submit">stop</button>
+    </form>
+    
+
+
+</body>
+</html>

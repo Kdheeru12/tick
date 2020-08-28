@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'hello.txt' %}">
+</head>
+<body>
+    fkjh4
+    ukhfdj
+    sjdfh
+    jksd
+    
+</body>
+</html>
+from django import forms
+from .models import Profile
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            "firstname",
+            "lastname",
+            "school_name",
+            "school_city",
+            "About_me",
+            "Class",
+            "Mobile",
+        ]
+        widgets = {
+            "firstname": forms.TextInput(attrs={'class':'form-control'}),
+            "lastname": forms.TextInput(attrs={'class':'form-control'}),
+            "school_name": forms.TextInput(attrs={'class':'form-control'}),
+            "school_city": forms.TextInput(attrs={'class':'form-control'}),
+            "About_me": forms.TextInput(attrs={'class':'form-control'}),
+            "Class": forms.TextInput(attrs={'class':'form-control'}),
+            "Mobile": forms.NumberInput(attrs={'class':'form-control'}),
+        }
+class SchoolForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'school_name',
+            'school_url',
+            'school_logo',
+            'school_address',
+            'school_city',
+            'school_state',
+            'school_country',
+            'school_pincode',
+            'school_contact_person',
+            'school_email',
+            'school_mobile',
+        ]
+        widgets = {
+            'school_name': forms.TextInput(attrs={'class':'form-control'}),
+            'school_url': forms.TextInput(attrs={'class':'form-control'}),
+            'school_address': forms.Textarea(attrs={'class':'form-control'}),
+            'school_city': forms.TextInput(attrs={'class':'form-control'}),
+            'school_state': forms.TextInput(attrs={'class':'form-control'}),
+            'school_country': forms.TextInput(attrs={'class':'form-control'}),
+            'school_pincode': forms.NumberInput(attrs={'class':'form-control'}),
+            'school_contact_person': forms.TextInput(attrs={'class':'form-control'}),
+            'school_email': forms.EmailInput(attrs={'class':'form-control'}),
+            'school_mobile': forms.NumberInput(attrs={'class':'form-control'}),
+        }
+        otp = random.randint(100000,999999)
+        #user = User.objects.create_user(username=phonenumber,password=password,email=email,first_name=first_name,last_name=last_name)
+        #user.save()
+        html_content = render_to_string("mail.html")
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives(
+          "test",
+        text_content,
+        'hello@shunya.tech',
+        [email]
+         )
+        email.attach_alternative(html_content,"text/html")
+        email.send()
+        context= {
+            "mail":email
+        }
